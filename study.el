@@ -64,7 +64,7 @@
   (cl-flet ((call (&rest args) (apply 'dbus-call-method :session id "/okular" "org.kde.okular" args))
             (filter (names) (seq-filter (lambda (it) (string-prefix-p "org.kde.okular" it)) names)))
     (pcase action
-      (:accepts (and (stringp data) (string= (file-name-extension data) "pdf")))
+      (:accepts (and (stringp data) (string-equal (file-name-extension data) "pdf")))
       (:start (format "org.kde.okular-%s" (study--systemd-run "okular")))
       (:list (filter (dbus-list-names :session)))
       (:pid (string-to-number (string-trim-left id ".*-")))
