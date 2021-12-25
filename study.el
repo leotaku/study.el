@@ -5,7 +5,7 @@
 ;; Author: Leo Gaskin <leo.gaskin@le0.gs>
 ;; Created: 26 May 2019
 ;; Homepage: https://github.com/leotaku/study.el
-;; Keywords: outlines, bib, multimedia, documents
+;; Keywords: outlines bib multimedia unix documents
 ;; Package-Version: 1.1.0
 ;; Package-Requires: ((emacs "27.1"))
 
