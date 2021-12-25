@@ -32,6 +32,25 @@
 
 ;;;; Variables
 
+(defgroup study nil
+  ""
+  :prefix "study-"
+  :group 'tools)
+
+(defcustom study-hist-limit 50
+  ""
+  :type 'natnum)
+
+(defvar study-hist-alist nil "")
+
+(defvar study-latest-viewer nil "")
+
+(cl-defstruct study-he
+  ""
+  (viewer nil :read-only t)
+  (offset 0)
+  (entries nil))
+
 ;;;###autoload
 (defun study-dired (&optional arg)
   (interactive "P")
@@ -50,7 +69,7 @@
 ;;;###autoload
 (defun study-undo (n)
   (interactive "p")
-  (when-let ((he (map-elt study-history study-latest-viewer))
+  (when-let ((he (map-elt study-hist-alist study-latest-viewer))
              (args (seq-elt (study-he-entries he) (study-hist-undo he n))))
     (message "History: %s/%s" (1+ (study-he-offset he)) (length (study-he-entries he)))
     (study-go-to (study-he-viewer he) (car args) (cadr args) t)))
@@ -107,15 +126,6 @@
 (advice-add 'study-go-to :around #'study-wrap-dbus)
 
 ;;; History logic
-
-(cl-defstruct study-he
-  ""
-  (viewer nil :read-only t)
-  (offset 0)
-  (entries nil))
-
-(defcustom study-hist-alist nil "")
-(defcustom study-hist-limit 20 "")
 
 (defun study-hist-push (viewer-id &optional file page)
   (when (and file page)
