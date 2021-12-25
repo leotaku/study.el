@@ -24,12 +24,12 @@
        (and number (string-to-number number))
        (deadgrep--propertize-hits content)))))
 
-(defun study--deadgrep-vr (fn &rest args)
+(defun study--deadgrep-visit-result (fn &rest args)
   (if (and (study-call nil :accepts (deadgrep--filename)))
       (study-view (deadgrep--filename) (deadgrep--line-number) nil)
     (apply fn args)))
 
-(defun study--deadgrep-vrow (fn &rest args)
+(defun study--deadgrep-visit-result-other-window (fn &rest args)
   (if (and (study-call nil :accepts (deadgrep--filename)))
       (study-view (deadgrep--filename) (deadgrep--line-number) t)
     (apply fn args)))
@@ -39,8 +39,8 @@
   (define-key deadgrep-mode-map (kbd "u") #'study-undo)
   (define-key deadgrep-mode-map (kbd "U") #'study-redo)
   (advice-add 'deadgrep--split-line :override #'study--deadgrep-split-line)
-  (advice-add 'deadgrep-visit-result :around #'study--deadgrep-vr)
-  (advice-add 'deadgrep-visit-result-other-window :around #'study--deadgrep-vrow))
+  (advice-add 'deadgrep-visit-result :around #'study--deadgrep-visit-result)
+  (advice-add 'deadgrep-visit-result-other-window :around #'study--deadgrep-visit-result-other-window))
 
 (provide 'study-deadgrep)
 
