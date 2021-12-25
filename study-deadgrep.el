@@ -6,6 +6,7 @@
 ;;; Code:
 
 (require 'deadgrep)
+(require 'study)
 
 (defconst study--deadgrep-regexp
   (rx "\x1b[32m" (group (+ digit))

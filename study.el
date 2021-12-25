@@ -28,6 +28,14 @@
 
 ;; To be written.
 
+(require 'dbus)
+(require 'dired)
+(require 'gv)
+(require 'map)
+(require 'seq)
+(eval-when-compile
+  (require 'cl-lib))
+
 ;;; Code:
 
 ;;;; Variables
