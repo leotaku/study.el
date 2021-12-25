@@ -7,7 +7,7 @@
 ;; Homepage: https://github.com/leotaku/study.el
 ;; Keywords: outlines bib multimedia unix documents
 ;; Package-Version: 1.1.0
-;; Package-Requires: ((emacs "27.1"))
+;; Package-Requires: ((emacs "27.1") (deadgrep "0.11"))
 
 ;; This file is not part of GNU Emacs.
 
