@@ -173,6 +173,10 @@
                      (x-window-property "_NET_WM_PID" nil "CARDINAL" it nil t)))
    (x-window-property "_NET_CLIENT_LIST" nil "WINDOW" 0 nil t)))
 
+;;; Integrations
+
+(with-eval-after-load 'deadgrep
+  (require 'study-deadgrep))
 
 (provide 'study)
 
