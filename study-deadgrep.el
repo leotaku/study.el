@@ -1,4 +1,4 @@
-;;; study-deadgrep.el --- To be written.  -*- lexical-binding: t; -*-
+;;; study-deadgrep.el --- To be written -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
