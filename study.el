@@ -179,10 +179,12 @@
     (string-distance string1 string2)))
 
 (defun study--sort-by-desktop (viewers)
-  (let ((pids (study--desktop-pids)))
-    (seq-sort-by
-     (lambda (it) (if (memq (study-call it :pid) pids) 1 0))
-     #'> viewers)))
+  (if-let ((_ (fboundp 'x-window-property))
+           (pids (study--desktop-pids)))
+      (seq-sort-by
+       (lambda (it) (if (memq (study-call it :pid) pids) 1 0))
+       #'> viewers)
+    (prog1 viewers)))
 
 (defun study--desktop-pids ()
   (seq-map
