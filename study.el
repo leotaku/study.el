@@ -166,7 +166,7 @@
     (string-to-number (string-trim output))))
 
 (defun study--best (viewers filename)
-  (seq-first (study--sort-by-desktop (study--sort-by-filename viewers filename))))
+  (seq-first (study--filter-by-desktop (study--sort-by-filename viewers filename))))
 
 (defun study--sort-by-filename (viewers filename)
   (seq-sort-by
@@ -178,12 +178,11 @@
       0.5
     (string-distance string1 string2)))
 
-(defun study--sort-by-desktop (viewers)
+(defun study--filter-by-desktop (viewers)
   (if-let ((_ (fboundp 'x-window-property))
            (pids (study--desktop-pids)))
-      (seq-sort-by
-       (lambda (it) (if (memq (study-call it :pid) pids) 1 0))
-       #'> viewers)
+      (seq-filter
+       (lambda (it) (memq (study-call it :pid) pids)) viewers)
     (prog1 viewers)))
 
 (defun study--desktop-pids ()
