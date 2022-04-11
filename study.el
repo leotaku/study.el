@@ -1,6 +1,6 @@
 ;;; study.el --- Various utilities for students of the natural sciences -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2019-2021 Leo Gaskin
+;; Copyright (C) 2019-2022 Leo Gaskin
 
 ;; Author: Leo Gaskin <leo.gaskin@le0.gs>
 ;; Created: 26 May 2019
