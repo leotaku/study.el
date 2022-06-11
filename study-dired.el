@@ -1,4 +1,4 @@
-;;; study-dired.el --- Integration between study.el and dired -*- lexical-binding: t; -*-
+;;; study-dired.el --- Integration between study.el and dired  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2021-2022 Leo Gaskin
 

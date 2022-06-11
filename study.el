@@ -1,4 +1,4 @@
-;;; study.el --- Various utilities for students of the natural sciences -*- lexical-binding: t; -*-
+;;; study.el --- Various utilities for students of the natural sciences  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2021-2022 Leo Gaskin
 

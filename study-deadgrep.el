@@ -1,4 +1,4 @@
-;;; study-deadgrep.el --- Integration between study.el and deadgrep -*- lexical-binding: t; -*-
+;;; study-deadgrep.el --- Integration between study.el and deadgrep  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2021-2022 Leo Gaskin
 
