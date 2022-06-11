@@ -1,4 +1,4 @@
-;;; study-generic.el --- study.el support for generic viewers  -*- lexical-binding: t; -*-
+;;; study-generic.el --- Generic backend code for study.el  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2021-2022 Leo Gaskin
 
