@@ -7,7 +7,6 @@
 ;; Homepage: https://github.com/leotaku/study.el
 ;; Keywords: multimedia unix documents
 ;; Package-Version: 0.1.0
-;; Package-Requires: ((emacs "27.1"))
 
 ;; This file is not part of GNU Emacs.
 

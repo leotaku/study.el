@@ -27,8 +27,9 @@
 ;;; Commentary:
 ;; 
 
+(require 'eieio)
+(require 'map)
 (require 'study-generic)
-(require 'study-okular)
 
 (defvar study-current-client nil
   "Most active `study-client' object in the current context.")
