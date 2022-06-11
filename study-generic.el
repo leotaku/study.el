@@ -78,7 +78,6 @@
              (priority (lambda (it) (string-distance (study-get-uri it) uri))))
     (seq-first (seq-sort-by priority #'< (seq-filter filter all)))))
 
-
 ;;; History
 
 (cl-defstruct study-history
