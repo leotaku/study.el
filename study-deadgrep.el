@@ -1,12 +1,12 @@
-;;; study-deadgrep.el --- To be written -*- lexical-binding: t; -*-
+;;; study-deadgrep.el --- Integration between study.el and deadgrep -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
 
 ;;; Code:
 
-(require 'deadgrep)
 (require 'study)
+(require 'deadgrep)
 
 (defconst study--deadgrep-regexp
   (rx "\x1b[32m" (group (+ digit))
@@ -25,13 +25,21 @@
        (deadgrep--propertize-hits content)))))
 
 (defun study--deadgrep-visit-result (fn &rest args)
-  (if (and (study-call nil :accepts (deadgrep--filename)))
-      (study-view (deadgrep--filename) (deadgrep--line-number) nil)
+  (if (study-supports 'study-client (deadgrep--filename))
+      (when-let* ((filename (deadgrep--filename))
+                  (page (deadgrep--line-number))
+                  (client (study-open 'study-client filename page)))
+        (study-set-current-client client)
+        (study-client-history-push client filename page))
     (apply fn args)))
 
 (defun study--deadgrep-visit-result-other-window (fn &rest args)
-  (if (and (study-call nil :accepts (deadgrep--filename)))
-      (study-view (deadgrep--filename) (deadgrep--line-number) t)
+  (if (study-supports 'study-client (deadgrep--filename))
+      (when-let* ((filename (deadgrep--filename))
+                  (page (deadgrep--line-number))
+                  (client (study-new 'study-client filename page)))
+        (study-set-current-client client)
+        (study-client-history-push client filename page))
     (apply fn args)))
 
 (with-eval-after-load 'deadgrep
