@@ -84,18 +84,17 @@
   (elements nil))
 
 (defun study-history-go (hist n)
-  (when-let ((target (+ (study-history-offset hist) n))
-             (elt (seq-elt (study-history-elements hist) target)))
-    (when (>= target 0)
-      (cl-incf (study-history-offset hist) n))))
+  (when-let* ((target (+ (study-history-offset hist) n))
+              (length (seq-length (study-history-elements hist)))
+              (clamped (min (max target 0) (1- length))))
+    (setf (study-history-offset hist) clamped)))
 
 (defun study-history-push (hist uri page)
-  (let ((elem (cons uri page)))
-    (unless (equal elem (seq-first (study-history-elements hist)))
-      (setf (study-history-elements hist)
-            (cons elem
-                  (seq-drop (study-history-elements hist)
-                            (study-history-offset hist))))
+  (let ((elem (cons uri page))
+        (dropped (seq-drop (study-history-elements hist)
+                           (study-history-offset hist))))
+    (unless (equal elem (seq-first dropped))
+      (setf (study-history-elements hist) (cons elem dropped))
       (setf (study-history-offset hist) 0))))
 
 (defun study-history-uri (hist)
