@@ -25,7 +25,9 @@
 ;; along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 ;;; Commentary:
-;; 
+
+;; This package implements the user-facing parts of the study.el
+;; system for operating external applications from within Emacs.
 
 ;;; Code:
 

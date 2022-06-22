@@ -25,7 +25,9 @@
 ;; along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 ;;; Commentary:
-;; 
+
+;; This package implements integrations between the study.el system
+;; and the builtin dired file browser.
 
 ;;; Code:
 

@@ -24,7 +24,12 @@
 ;; along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 ;;; Commentary:
-;; 
+
+;; This package implements the abstract base class that clients
+;; objects are expected to inherit from to integrate an external
+;; application with Emacs.  Methods `study-new', `study-instances',
+;; `study-supports', `study-get-uri' `study-get-page', `study-set-uri'
+;; and `study-set-page' are mandatory.
 
 ;;; Code:
 

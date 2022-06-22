@@ -25,7 +25,12 @@
 ;; along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 ;;; Commentary:
-;; 
+
+;; This package implements a bridge between Emacs and the Okular PDF
+;; viewer as part of the study.el system.
+
+;; For communication, both systemd and dbus user sessions are used and
+;; thus required to be supported by the system.
 
 ;;; Code:
 

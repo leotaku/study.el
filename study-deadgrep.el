@@ -25,7 +25,17 @@
 ;; along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 ;;; Commentary:
-;;
+
+;; This package implements integrations between the study.el system
+;; and the external deadgrep.el package with a particular focus on
+;; searching through and opening PDF files.
+
+;; In order to search through non-text files, the ripgrep-all "rga"
+;; executable is required and assumed to be present on the system.
+
+;; Technically, all files searchable by the ripgrep-all "rga" tool
+;; that are also supported by a `study-client' subclass should be
+;; supported without any additional effort.
 
 ;;; Code:
 
