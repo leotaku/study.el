@@ -27,10 +27,10 @@
 ;;; Commentary:
 ;; 
 
+;;; Code:
+
 (require 'study)
 (require 'dired)
-
-;;; Code:
 
 ;;;###autoload
 (defun study-dired (&optional arg)
