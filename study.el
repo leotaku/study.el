@@ -27,6 +27,8 @@
 ;;; Commentary:
 ;; 
 
+;;; Code:
+
 (require 'eieio)
 (require 'map)
 (require 'study-generic)
