@@ -60,7 +60,7 @@
 
 (defun study--deadgrep-visit-result (fn &rest args)
   (if (study-supports 'study-client (deadgrep--filename))
-      (when-let* ((filename (deadgrep--filename))
+      (when-let* ((filename (expand-file-name (deadgrep--filename)))
                   (page (deadgrep--line-number))
                   (client (study-open 'study-client filename page)))
         (study-set-current-client client)
@@ -69,7 +69,7 @@
 
 (defun study--deadgrep-visit-result-other-window (fn &rest args)
   (if (study-supports 'study-client (deadgrep--filename))
-      (when-let* ((filename (deadgrep--filename))
+      (when-let* ((filename (expand-file-name (deadgrep--filename)))
                   (page (deadgrep--line-number))
                   (client (study-new 'study-client filename page)))
         (study-set-current-client client)
