@@ -55,9 +55,13 @@
         (study-find-file-other-window filename prefix-arg)
       (funcall fn))))
 
+(defun study--advice-dired-mouse-find-file (fn &rest args)
+  (apply fn (car args) #'study-find-file (cddr args)))
+
 (with-eval-after-load 'dired
   (advice-add 'dired-find-file :around #'study--advice-dired-find-file)
-  (advice-add 'dired-find-file-other-window :around #'study--advice-dired-find-file-other-window))
+  (advice-add 'dired-find-file-other-window :around #'study--advice-dired-find-file-other-window)
+  (advice-add 'dired-mouse-find-file :around #'study--advice-dired-mouse-find-file))
 
 (provide 'study-dired)
 
