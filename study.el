@@ -42,11 +42,18 @@
   "Hash table of histories mapped to `study-client' objects.")
 
 ;;;###autoload
-(defun study-find-file (filename)
-  (interactive (list (find-file-read-args
-                      "Find file: "
-                      (confirm-nonexistent-file-or-buffer))))
-  (study-open 'study-client (car filename)))
+(defun study-find-file (filename &optional page)
+  (interactive "f\nP")
+  (when-let ((client (study-open 'study-client filename page)))
+    (study-set-current-client client)
+    (study-client-history-push client filename page)))
+
+;;;###autoload
+(defun study-find-file-other-window (filename &optional page)
+  (interactive "f\nP")
+  (when-let ((client (study-open 'study-client filename page)))
+    (study-set-current-client client)
+    (study-client-history-push client filename page)))
 
 ;;;###autoload
 (defun study-undo (n)
