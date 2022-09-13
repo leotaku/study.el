@@ -46,13 +46,13 @@
 (defun study--advice-dired-find-file (fn)
   (let ((filename (dired-file-name-at-point)))
     (if (study-supports 'study-client filename)
-        (study-find-file filename prefix-arg)
+        (study-find-file filename current-prefix-arg)
       (funcall fn))))
 
 (defun study--advice-dired-find-file-other-window (fn)
   (let ((filename (dired-file-name-at-point)))
     (if (study-supports 'study-client filename)
-        (study-find-file-other-window filename prefix-arg)
+        (study-find-file-other-window filename current-prefix-arg)
       (funcall fn))))
 
 (defun study--advice-dired-mouse-find-file (fn &rest args)
