@@ -51,7 +51,7 @@
 ;;;###autoload
 (defun study-find-file-other-window (filename &optional page)
   (interactive "f\nP")
-  (when-let ((client (study-open 'study-client filename page)))
+  (when-let ((client (study-new 'study-client filename page)))
     (study-set-current-client client)
     (study-client-history-push client filename page)))
 
