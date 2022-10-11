@@ -68,10 +68,10 @@
             (dbus-list-names :session))))
 
 (cl-defmethod study-get-uri ((client study-okular-client))
-  (study--okular-dbus client "currentDocument"))
+  (study--okular-sync-dbus client "currentDocument"))
 
 (cl-defmethod study-get-page ((client study-okular-client))
-  (study--okular-dbus client "currentPage"))
+  (study--okular-sync-dbus client "currentPage"))
 
 (cl-defmethod study-set-uri ((client study-okular-client) uri)
   (let ((normalized (expand-file-name uri)))
@@ -89,7 +89,7 @@
 (cl-defmethod study-previous-page ((client study-okular-client))
   (study--okular-async-dbus client "slotPreviousPage"))
 
-(cl-defmethod study--okular-dbus ((client study-okular-client) method &rest args)
+(cl-defmethod study--okular-sync-dbus ((client study-okular-client) method &rest args)
   (let ((ref (oref client :reference)))
     (apply 'dbus-call-method :session ref "/okular" "org.kde.okular" method args)))
 
