@@ -49,7 +49,7 @@
   (if-let ((client (study--best-viewer class uri)))
       (prog1 client
         (study-set-uri client uri)
-        (study-set-page client page))
+        (when page (study-set-page client page)))
     (study-new class uri page)))
 
 (cl-defgeneric study-new ((class (subclass study-client)) uri page)
