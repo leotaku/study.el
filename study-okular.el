@@ -55,7 +55,7 @@
 
 (cl-defmethod study-supports ((_class (subclass study-okular-client)) uri)
   (when-let ((parsed (url-generic-parse-url uri)))
-    (and (seq-contains-p '("http" "https" nil) (url-type parsed))
+    (and (seq-contains-p '("http" "https" "file" nil) (url-type parsed))
          (string-suffix-p "pdf" (seq-first (url-path-and-query parsed))))))
 
 (cl-defmethod study-instances ((class (subclass study-okular-client)))
