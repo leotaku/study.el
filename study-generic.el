@@ -28,8 +28,8 @@
 ;; This package implements the abstract base class that clients
 ;; objects are expected to inherit from to integrate an external
 ;; application with Emacs.  Methods `study-new', `study-instances',
-;; `study-supports', `study-get-uri' `study-get-page', `study-set-uri'
-;; and `study-set-page' are mandatory.
+;; `study-supports', `study-get-uri' `study-get-context',
+;; `study-set-uri' and `study-set-context' are mandatory.
 
 ;;; Code:
 
@@ -45,16 +45,16 @@
 
 ;;; Generic
 
-(cl-defgeneric study-open ((class (subclass study-client)) uri page)
+(cl-defgeneric study-open ((class (subclass study-client)) uri context)
   (if-let ((client (study--best-client class uri)))
       (prog1 client
         (study-set-uri client uri)
-        (when page (study-set-page client page)))
-    (study-new class uri page)))
+        (when context (study-set-context client context)))
+    (study-new class uri context)))
 
-(cl-defgeneric study-new ((class (subclass study-client)) uri page)
+(cl-defgeneric study-new ((class (subclass study-client)) uri context)
   (let ((supported (seq-filter (lambda (it) (study-supports it uri)) (eieio-class-children class))))
-    (study-new (seq-first supported) uri page)))
+    (study-new (seq-first supported) uri context)))
 
 (cl-defgeneric study-instances ((class (subclass study-client)))
   (seq-mapcat #'study-instances (eieio-class-children class)))
@@ -64,17 +64,17 @@
 
 (cl-defgeneric study-get-uri ((client study-client)))
 
-(cl-defgeneric study-get-page ((client study-client)))
+(cl-defgeneric study-get-context ((client study-client)))
 
 (cl-defgeneric study-set-uri ((client study-client) uri))
 
-(cl-defgeneric study-set-page ((client study-client) page-number))
+(cl-defgeneric study-set-context ((client study-client) context))
 
-(cl-defgeneric study-next-page ((client study-client))
-  (study-set-page client (1+ (study-get-page client))))
+(cl-defgeneric study-next-context ((client study-client))
+  (study-set-context client (1+ (study-get-page client))))
 
-(cl-defgeneric study-previous-page ((client study-client))
-  (study-set-page client (1- (study-get-page client))))
+(cl-defgeneric study-previous-context ((client study-client))
+  (study-set-context client (1- (study-get-context client))))
 
 (defun study--best-client (class uri)
   (when-let ((all (study-instances class))
@@ -94,8 +94,8 @@
               (clamped (min (max target 0) (1- length))))
     (setf (study-history-offset hist) clamped)))
 
-(defun study-history-push (hist uri page)
-  (let ((elem (cons uri page))
+(defun study-history-push (hist uri context)
+  (let ((elem (cons uri context))
         (dropped (seq-drop (study-history-elements hist)
                            (study-history-offset hist))))
     (unless (equal elem (seq-first dropped))
@@ -106,7 +106,7 @@
   (car (seq-elt (study-history-elements hist)
                 (study-history-offset hist))))
 
-(defun study-history-page (hist)
+(defun study-history-context (hist)
   (cdr (seq-elt (study-history-elements hist)
                 (study-history-offset hist))))
 

@@ -42,18 +42,18 @@
   "Hash table of histories mapped to `study-client' objects.")
 
 ;;;###autoload
-(defun study-find-file (filename &optional page)
+(defun study-find-file (filename &optional context)
   (interactive "f\nP")
-  (when-let ((client (study-open 'study-client filename page)))
+  (when-let ((client (study-open 'study-client filename context)))
     (study-set-current-client client)
-    (study-client-history-push client filename page)))
+    (study-client-history-push client filename context)))
 
 ;;;###autoload
-(defun study-find-file-other-window (filename &optional page)
+(defun study-find-file-other-window (filename &optional context)
   (interactive "f\nP")
-  (when-let ((client (study-new 'study-client filename page)))
+  (when-let ((client (study-new 'study-client filename context)))
     (study-set-current-client client)
-    (study-client-history-push client filename page)))
+    (study-client-history-push client filename context)))
 
 ;;;###autoload
 (defun study-undo (n)
@@ -64,7 +64,7 @@
              (1+ (study-history-offset hist))
              (seq-length (study-history-elements hist)))
     (study-set-uri study-current-client (study-history-uri hist))
-    (study-set-page study-current-client (study-history-page hist))))
+    (study-set-context study-current-client (study-history-context hist))))
 
 ;;;###autoload
 (defun study-redo (n)
@@ -75,11 +75,11 @@
   (setq-default study-current-client client)
   (setq-local study-current-client client))
 
-(defun study-client-history-push (client uri page)
+(defun study-client-history-push (client uri context)
   (let ((ref (oref client :reference)))
     (unless (map-contains-key study-history-map ref)
       (map-put! study-history-map ref (make-study-history)))
-    (study-history-push (map-elt study-history-map ref) uri page)))
+    (study-history-push (map-elt study-history-map ref) uri context)))
 
 (defun study-client-history (client)
   (let ((ref (oref client :reference)))

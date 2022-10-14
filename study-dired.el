@@ -38,10 +38,10 @@
 (defun study-dired (&optional arg)
   (interactive "P")
   (let ((filename (dired-file-name-at-point))
-        (page (and (numberp arg) arg)))
+        (context (and (numberp arg) arg)))
     (if (eq arg '(4))
-        (study-find-file-other-window filename page)
-      (study-find-file filename page))))
+        (study-find-file-other-window filename context)
+      (study-find-file filename context))))
 
 (defun study--advice-dired-find-file (fn)
   (let ((filename (dired-file-name-at-point)))

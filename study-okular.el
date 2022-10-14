@@ -45,12 +45,12 @@
 
 (eieio-declare-slots :reference :active)
 
-(cl-defmethod study-new ((class (subclass study-okular-client)) uri page)
+(cl-defmethod study-new ((class (subclass study-okular-client)) uri context)
   (let ((ref (format
               "org.kde.okular-%s"
               (study--systemd-run
                "okular" "--noraise"
-               (format "%s#%s" (expand-file-name uri) (or page ""))))))
+               (format "%s#%s" (expand-file-name uri) (or context ""))))))
     (make-instance class :reference ref)))
 
 (cl-defmethod study-supports ((_class (subclass study-okular-client)) uri)
@@ -70,7 +70,7 @@
 (cl-defmethod study-get-uri ((client study-okular-client))
   (study--okular-sync-dbus client "currentDocument"))
 
-(cl-defmethod study-get-page ((client study-okular-client))
+(cl-defmethod study-get-context ((client study-okular-client))
   (study--okular-sync-dbus client "currentPage"))
 
 (cl-defmethod study-set-uri ((client study-okular-client) uri)
@@ -78,19 +78,19 @@
     (unless (equal normalized (study-get-uri client))
       (study--okular-async-dbus client "openDocument" :string normalized))))
 
-(cl-defmethod study-set-page ((client study-okular-client) page)
+(cl-defmethod study-set-context ((client study-okular-client) context)
   (cond
-   ((numberp page)
-    (when (not (equal page (study-get-page client)))
-      (study--okular-async-dbus client "goToPage" :uint32 page)))
-   ((stringp page)
-    (let ((uri (concat "file://" (study-get-uri client) "#" page)))
+   ((numberp context)
+    (when (not (equal context (study-get-context client)))
+      (study--okular-async-dbus client "goToPage" :uint32 context)))
+   ((stringp context)
+    (let ((uri (concat "file://" (study-get-uri client) "#" context)))
       (study--okular-async-dbus client "openDocument" :string uri)))))
 
-(cl-defmethod study-next-page ((client study-okular-client))
+(cl-defmethod study-next-context ((client study-okular-client))
   (study--okular-async-dbus client "slotNextPage"))
 
-(cl-defmethod study-previous-page ((client study-okular-client))
+(cl-defmethod study-previous-context ((client study-okular-client))
   (study--okular-async-dbus client "slotPreviousPage"))
 
 (cl-defmethod study--okular-sync-dbus ((client study-okular-client) method &rest args)
