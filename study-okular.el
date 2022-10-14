@@ -79,9 +79,13 @@
       (study--okular-async-dbus client "openDocument" :string normalized))))
 
 (cl-defmethod study-set-page ((client study-okular-client) page)
-  (when (and (numberp page)
-             (not (equal page (study-get-page client))))
-    (study--okular-async-dbus client "goToPage" :uint32 page)))
+  (cond
+   ((numberp page)
+    (when (not (equal page (study-get-page client)))
+      (study--okular-async-dbus client "goToPage" :uint32 page)))
+   ((stringp page)
+    (let ((uri (concat "file://" (study-get-uri client) "#" page)))
+      (study--okular-async-dbus client "openDocument" :string uri)))))
 
 (cl-defmethod study-next-page ((client study-okular-client))
   (study--okular-async-dbus client "slotNextPage"))
