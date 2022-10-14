@@ -46,7 +46,7 @@
 ;;; Generic
 
 (cl-defgeneric study-open ((class (subclass study-client)) uri page)
-  (if-let ((client (study--best-viewer class uri)))
+  (if-let ((client (study--best-client class uri)))
       (prog1 client
         (study-set-uri client uri)
         (when page (study-set-page client page)))
@@ -76,7 +76,7 @@
 (cl-defgeneric study-previous-page ((client study-client))
   (study-set-page client (1- (study-get-page client))))
 
-(defun study--best-viewer (class uri)
+(defun study--best-client (class uri)
   (when-let ((all (study-instances class))
              (filter (lambda (it) (study-supports (eieio-object-class it) uri)))
              (priority (lambda (it) (string-distance (study-get-uri it) uri))))
