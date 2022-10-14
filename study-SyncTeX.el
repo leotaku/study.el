@@ -33,7 +33,7 @@
 
 (require 'study)
 
-(defun study--okular-TeX-handler ()
+(defun study-okular-SyncTeX-handler ()
   (let* ((file (TeX-command-expand "%o"))
          (context (TeX-command-expand "src:%n%b")))
     (study-open 'study-okular-client file context)))
@@ -41,7 +41,7 @@
 (with-eval-after-load 'tex
   (add-to-list
    'TeX-view-program-list-builtin
-   '("study-SyncTeX" study--okular-TeX-handler)))
+   '("study-SyncTeX" study-okular-SyncTeX-handler)))
 
 (provide 'study-SyncTeX)
 
