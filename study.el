@@ -56,6 +56,20 @@
     (study-client-history-push client filename context)))
 
 ;;;###autoload
+(defun study-next (&optional n)
+  (interactive "p")
+  (if (<= 0 n)
+      (dotimes (_ n)
+        (study-next-context study-current-client))
+    (dotimes (_ (- n))
+      (study-previous-context study-current-client))))
+
+;;;###autoload
+(defun study-previous (&optional n)
+  (interactive "p")
+  (study-next (- n)))
+
+;;;###autoload
 (defun study-undo (n)
   (interactive "p")
   (when-let ((hist (study-client-history study-current-client)))
