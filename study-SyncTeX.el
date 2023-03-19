@@ -34,7 +34,7 @@
 (require 'study)
 
 (defun study-okular-SyncTeX-handler ()
-  (let* ((file (TeX-command-expand "%o"))
+  (let* ((file (TeX-active-master "pdf" nil))
          (context (TeX-command-expand "src:%n%b")))
     (study-open 'study-okular-client file context)))
 
