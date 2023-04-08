@@ -1,6 +1,6 @@
 ;;; study.el --- Utilities for reasonably efficient studying  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2021-2022 Leo Gaskin
+;; Copyright (C) 2021-2023 Leo Gaskin
 
 ;; Author: Leo Gaskin <leo.gaskin@le0.gs>
 ;; Created: 7 November 2021
