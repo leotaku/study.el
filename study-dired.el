@@ -39,7 +39,7 @@
   (interactive "P")
   (let ((filename (dired-file-name-at-point))
         (context (and (numberp arg) arg)))
-    (if (eq arg '(4))
+    (if (equal arg '(4))
         (study-find-file-other-window filename context)
       (study-find-file filename context))))
 
