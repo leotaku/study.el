@@ -96,7 +96,7 @@
     (study-history-push (map-elt study-history-map ref) uri context)))
 
 (defun study-client-history (client)
-  (let ((ref (oref client :reference)))
+  (let ((ref (oref client reference)))
     (map-elt study-history-map ref)))
 
 (provide 'study)
