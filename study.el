@@ -58,11 +58,9 @@
 ;;;###autoload
 (defun study-next (&optional n)
   (interactive "p")
-  (if (<= 0 n)
-      (dotimes (_ n)
-        (study-next-context study-current-client))
-    (dotimes (_ (- n))
-      (study-previous-context study-current-client))))
+  (if (>= n 0)
+      (study-next-context study-current-client n)
+    (study-previous-context study-current-client (- n))))
 
 ;;;###autoload
 (defun study-previous (&optional n)

@@ -70,11 +70,11 @@
 
 (cl-defgeneric study-set-context ((client study-client) context))
 
-(cl-defgeneric study-next-context ((client study-client))
-  (study-set-context client (1+ (study-get-page client))))
+(cl-defgeneric study-next-context ((client study-client) &optional n)
+  (study-set-context client (+ (study-get-context client) (or n 1))))
 
-(cl-defgeneric study-previous-context ((client study-client))
-  (study-set-context client (1- (study-get-context client))))
+(cl-defgeneric study-previous-context ((client study-client) &optional n)
+  (study-set-context client (- (study-get-context client) (or n 1))))
 
 (defun study--best-client (class uri)
   (when-let ((all (study-instances class))
