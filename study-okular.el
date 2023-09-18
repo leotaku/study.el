@@ -88,14 +88,10 @@
       (study--okular-async-dbus client "openDocument" :string uri)))))
 
 (cl-defmethod study-next-context ((client study-okular-client) &optional n)
-  (if (= n 1)
-      (study--okular-async-dbus client "slotNextPage")
-    (study-set-context client (+ (study-get-context client) n))))
+  (study-set-context client (+ (study-get-context client) n)))
 
 (cl-defmethod study-previous-context ((client study-okular-client) &optional n)
-  (if (= n 1)
-      (study--okular-async-dbus client "slotPreviousPage")
-    (study-set-context client (- (study-get-context client) n))))
+  (study-set-context client (- (study-get-context client) n)))
 
 (cl-defmethod study--okular-sync-dbus ((client study-okular-client) method &rest args)
   (let ((ref (oref client :reference)))
