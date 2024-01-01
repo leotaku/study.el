@@ -1,6 +1,6 @@
 ;;; study-SyncTeX.el --- Integration between study.el and SyncTeX  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2021-2023 Leo Gaskin
+;; Copyright (C) 2021-2024 Leo Gaskin
 
 ;; Author: Leo Gaskin <leo.gaskin@le0.gs>
 ;; Created: 14 October 2022

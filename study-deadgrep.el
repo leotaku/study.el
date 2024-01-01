@@ -1,6 +1,6 @@
 ;;; study-deadgrep.el --- Integration between study.el and deadgrep  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2021-2023 Leo Gaskin
+;; Copyright (C) 2021-2024 Leo Gaskin
 
 ;; Author: Leo Gaskin <leo.gaskin@le0.gs>
 ;; Created: 7 November 2021
