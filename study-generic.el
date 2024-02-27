@@ -41,8 +41,6 @@
 (defclass study-client ()
   ((reference :initarg :reference :read-only t)))
 
-(eieio-declare-slots :reference)
-
 ;;; Generic
 
 (cl-defgeneric study-open ((class (subclass study-client)) uri context)

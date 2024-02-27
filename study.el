@@ -88,7 +88,7 @@
   (setq-local study-current-client client))
 
 (defun study-client-history-push (client uri context)
-  (let ((ref (oref client :reference)))
+  (let ((ref (oref client reference)))
     (unless (map-contains-key study-history-map ref)
       (map-put! study-history-map ref (make-study-history)))
     (study-history-push (map-elt study-history-map ref) uri context)))
