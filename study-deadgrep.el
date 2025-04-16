@@ -78,6 +78,7 @@
 
 (with-eval-after-load 'deadgrep
   (setq deadgrep-executable "rga")
+  (add-to-list 'deadgrep-extra-arguments "--rga-adapters=poppler,postprocpagebreaks")
   (define-key deadgrep-mode-map (kbd "u") #'study-undo)
   (define-key deadgrep-mode-map (kbd "U") #'study-redo)
   (advice-add 'deadgrep--split-line :override #'study--deadgrep-split-line)
